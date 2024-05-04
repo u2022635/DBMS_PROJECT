@@ -1,0 +1,251 @@
+-- Create the database
+CREATE DATABASE db_LibraryManagement;
+
+-- Create table table_publisher
+CREATE TABLE table_publisher (
+    PublisherName VARCHAR(50) PRIMARY KEY NOT NULL,
+    PublisherAddress VARCHAR(100) NOT NULL,
+    PublisherPhone VARCHAR(20) NOT NULL
+);
+
+-- Insert values into table_publisher
+INSERT INTO table_publisher (PublisherName, PublisherAddress, PublisherPhone) VALUES
+('Publisher1', 'Address1', '1234567890'),
+('Publisher2', 'Address2', '0987654321');
+
+Select * from table_publisher;
+
+-- Create table table_book
+CREATE TABLE table_book (
+    BookID INT PRIMARY KEY,
+    Book_Title VARCHAR(100) NOT NULL,
+    PublisherName VARCHAR(50) NOT NULL,
+    FOREIGN KEY (PublisherName) REFERENCES table_publisher(PublisherName)
+);
+
+-- Insert values into table_book
+INSERT INTO table_book (BookID, Book_Title, PublisherName) VALUES
+(1, 'Book1', 'Publisher1'),
+(2, 'Book2', 'Publisher2');
+
+Select * from table_book;
+
+-- Create table table_library_branch
+CREATE TABLE table_library_branch (
+    library_branch_BranchID INT PRIMARY KEY,
+    library_branch_BranchName VARCHAR(100) NOT NULL,
+    library_branch_BranchAddress VARCHAR(200) NOT NULL
+);
+
+-- Insert values into table_library_branch
+INSERT INTO table_library_branch (library_branch_BranchID, library_branch_BranchName, library_branch_BranchAddress) VALUES
+(1, 'Branch1', 'Address1'),
+(2, 'Branch2', 'Address2');
+
+Select * from table_library_branch;
+
+-- Create table table_borrower
+CREATE TABLE table_borrower (
+    CardNo INT PRIMARY KEY,
+    BorrowerName VARCHAR(100) NOT NULL,
+    BorrowerAddress VARCHAR(200) NOT NULL,
+    BorrowerPhone VARCHAR(50) NOT NULL
+);
+
+-- Insert values into table_borrower
+INSERT INTO table_borrower (CardNo, BorrowerName, BorrowerAddress, BorrowerPhone) VALUES
+(1, 'Borrower1', 'Address1', '1234567890'),
+(2, 'Borrower2', 'Address2', '0987654321');
+
+Select * from table_borrower;
+
+-- Create table table_book_authors
+CREATE TABLE table_book_authors (
+    AuthorID INT PRIMARY KEY,
+    BookID INT NOT NULL,
+    AuthorName VARCHAR(50) NOT NULL,
+    FOREIGN KEY (BookID) REFERENCES table_book(BookID)
+);
+
+-- Insert values into table_book_authors
+INSERT INTO table_book_authors (AuthorID, BookID, AuthorName) VALUES
+(1, 1, 'Author1'),
+(2, 2, 'Author2');
+
+Select * from table_book_authors;
+-- Create table book
+CREATE TABLE book (
+    isbn VARCHAR(13) PRIMARY KEY,
+    title VARCHAR(80) NOT NULL,
+    author VARCHAR(80) NOT NULL,
+    category VARCHAR(80) NOT NULL,
+    price INT NOT NULL,
+    copies INT NOT NULL
+);
+
+-- Insert values into book
+INSERT INTO book (isbn, title, author, category, price, copies) VALUES
+('9788654552277', 'X-Men: God Loves, Man Kills', 'Chris', 'Comics', 98, 39),
+('0964161484100', 'Mike Tyson: Undisputed Truth', 'Larry Sloman, Mike Tyson', 'Sports', 654, 79),
+('6901142585540', 'V for Vendetta', 'Alan Moore', 'Comics', 600, 23),
+('9094996245442', 'When Breath Becomes Air', 'Paul Kalanithi', 'Medical', 500, 94),
+('8653491200700', 'The Great Gatsby', 'F. Scott Fitzgerald', 'Fiction', 432, 120);
+
+Select * from book;
+
+-- Create table book_issue
+CREATE TABLE book_issue (
+    issue_id INT PRIMARY KEY,
+    member VARCHAR(20) NOT NULL,
+    book_isbn VARCHAR(13) NOT NULL,
+    due_date DATE NOT NULL,
+    last_reminded DATE DEFAULT NULL
+);
+
+-- Insert values into book_issue
+INSERT INTO book_issue (issue_id, member, book_isbn, due_date) VALUES
+(1, 'Member1', '9788654552277', CURRENT_DATE),
+(2, 'Member2', '0964161484100', CURRENT_DATE);
+
+Select * from book;
+
+-- Create table librarian
+CREATE TABLE librarian (
+    id INT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL,
+    password CHAR(40) NOT NULL
+);
+
+-- Insert values into librarian
+INSERT INTO librarian (id, username, password) VALUES
+(1, 'Vani', 'xthds97@3h$yfc*jrk0%dfg');
+
+Select * from librarian;
+-- Create table member
+CREATE TABLE member (
+    id INT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL,
+    password CHAR(40) NOT NULL,
+    name VARCHAR(80) NOT NULL,
+    email VARCHAR(80) NOT NULL,
+    balance INT NOT NULL
+);
+
+-- Insert values into member
+INSERT INTO member (id, username, password, name, email, balance) VALUES
+(1, 'Member1', 'password1', 'John Doe', 'john@example.com', 100),
+(2, 'Member2', 'password2', 'Jane Doe', 'jane@example.com', 200);
+
+Select * from member;
+
+-- Create table pending_book_requests
+CREATE TABLE pending_book_requests (
+    request_id INT PRIMARY KEY,
+    member VARCHAR(20) NOT NULL,
+    book_isbn VARCHAR(13) NOT NULL,
+    time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert values into pending_book_requests
+INSERT INTO pending_book_requests (request_id, member, book_isbn) VALUES
+(1, 'Member1', '6901142585540'),
+(2, 'Member2', '9094996245442');
+
+Select * from pending_book_requests;
+
+-- Create table pending_registrations
+CREATE TABLE pending_registrations (
+    username VARCHAR(30) NOT NULL,
+    password CHAR(20) NOT NULL,
+    name VARCHAR(40) NOT NULL,
+    email VARCHAR(20) NOT NULL,
+    balance INT,
+    time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert values into pending_registrations
+INSERT INTO pending_registrations (username, password, name, email, balance) VALUES
+('Robin200', '7t6hg$56y^', 'Robin', 'robin@gmail.com', 200),
+('Aadhya100', 'Ujgf(76G5$#f@df', 'Aadhya', 'aadhya100@gmail.com', 1500);
+
+Select * from pending_registrations;
+
+-- Create trigger function
+CREATE OR REPLACE FUNCTION before_insert_pending_book_requests()
+RETURNS TRIGGER AS
+$$
+DECLARE 
+    member_balance INT;
+    book_price INT;
+BEGIN
+    SELECT balance INTO member_balance FROM member WHERE username = NEW.member;
+    SELECT price INTO book_price FROM book WHERE isbn = NEW.book_isbn;
+    
+    IF member_balance >= book_price THEN
+        UPDATE member SET balance = NEW.balance - book_price WHERE username = NEW.member;
+        RETURN NEW;
+    ELSE
+        RAISE EXCEPTION 'Insufficient balance to request this book';
+        RETURN NULL;
+    END IF;
+END;
+$$
+LANGUAGE plpgsql;
+
+-- Create trigger
+CREATE TRIGGER trigger_before_insert_pending_book_requests
+BEFORE INSERT
+ON pending_book_requests
+FOR EACH ROW
+EXECUTE FUNCTION before_insert_pending_book_requests();
+
+-- Create trigger function for book issuance
+CREATE OR REPLACE FUNCTION book_issued_trigger_function()
+RETURNS TRIGGER AS
+$$
+BEGIN
+    -- Decrease the number of copies of the book in the library when issued
+    UPDATE book
+    SET copies = copies - 1
+    WHERE isbn = NEW.book_isbn;
+
+    RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+-- Create trigger for book issuance
+CREATE TRIGGER book_issued_trigger
+AFTER INSERT ON book_issue
+FOR EACH ROW
+EXECUTE FUNCTION book_issued_trigger_function();
+
+-- Search books by title
+SELECT * FROM book WHERE title LIKE 'God Loves%';
+
+-- Search books by author
+SELECT * FROM book WHERE author LIKE 'Chris';
+
+-- Search books by category
+SELECT * FROM book WHERE category LIKE 'Comics';
+
+-- Search books by ISBN
+SELECT * FROM book WHERE isbn = '9788654552277';
+
+-- Search books by title and category
+SELECT * FROM book WHERE title LIKE '' AND category LIKE '%search_term%';
+
+-- Search books by title, author, and category
+SELECT * FROM book WHERE title LIKE '%search_term%' OR author LIKE '%search_term%' OR category LIKE '%search_term%';
+
+-- Update the information of a book in the 'book' table
+
+UPDATE book
+SET title = 'Updated Title',
+    author = 'Updated Author',
+    category = 'Updated Category',
+    price = 999, -- Updated price
+    copies = 50   -- Updated number of copies
+WHERE isbn = '9788654552277';
+-- Specify the ISBN of the book you want to update
+
