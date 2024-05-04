@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Actions</title>
+<style>
+  /* Reset CSS */
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+
+   header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+  /* Container */
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"], input[type="password"] {
+    width: calc(100% - 150px);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    margin-right: 10px;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  p {
+    margin-top: 10px;
+    color: #666;
+    text-align: center;
+  }
+
+  .message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+
+  .form-group.inline {
+    display: flex;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Library Management System</h1>
+</header>
+
+
+<div class="container">
+  <h1>Member Actions</h1>
+  <div class="form-group">
+    <label for="search">Search for Books</label>
+    <input type="text" id="search" placeholder="Enter Book Title or Author">
+    <button onclick="searchBooks()">Search</button>
+  </div>
+  <div class="form-group">
+    <label for="request">Request Book Issue</label>
+    <input type="text" id="request" placeholder="Enter Book Title">
+    <button onclick="requestIssue()">Request Issue</button>
+  </div>
+  <div class="form-group inline">
+    <p id="balance">Your current balance: $100</p>
+    <button onclick="updateProfile()">Update Profile</button>
+  </div>
+  <div class="message" id="message"></div>
+</div>
+
+<script>
+  function searchBooks() {
+    var searchQuery = document.getElementById("search").value;
+    // Here you can implement the logic to search for books based on the query
+    document.getElementById("message").innerText = "Books found!";
+  }
+
+  function requestIssue() {
+    var bookTitle = document.getElementById("request").value;
+    // Here you can implement the logic to request the issue of the specified book
+    document.getElementById("message").innerText = "Book issue requested!";
+  }
+
+  function updateProfile() {
+    // Here you can implement the logic to update the member's profile
+    document.getElementById("message").innerText = "Profile updated successfully.";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System Dashboard</title>
+  <style>
+    /* Reset CSS */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Container */
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 0 0 auto;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #424242;
+      color: #fff;
+      width: 250px; /* Sidebar width */
+      flex: 0 0 auto;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background-color: #444;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>Library Management System</h1>
+</header>
+
+<!-- Container -->
+<div class="container">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <a href="homepage.html">Dashboard</a>
+    <a href="issue.html">Book Issues And Returns</a>
+    <a href="search.html">Book Search</a>
+    <a href="addbook.html">Add Book</a>
+    <a href="updatebook.html">Update Book</a>
+    <a href="accmanagement.html">Update User Details</a>
+ 
+
+    <!-- Add more sidebar links as needed -->
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Number of Books Issued -->
+    <div class="card">
+      <h2>Number of Books Issued</h2>
+      <p>This section displays the total number of books currently issued by the library.</p>
+      <!-- Placeholder content -->
+    </div>
+    
+    <!-- Pending Requests -->
+    <div class="card">
+      <h2>Pending Requests</h2>
+      <p>This section shows the pending book requests waiting for approval from librarians.</p>
+      <!-- Placeholder content -->
+    </div>
+    
+    <!-- Overdue Books -->
+    <div class="card">
+      <h2>Overdue Books</h2>
+      <p>This section lists the books that are overdue and need to be returned.</p>
+      <!-- Placeholder content -->
+    </div>
+    
+    <!-- Add more sections as needed -->
+  </div>
+
+</div>
+
+</body>
+</html>

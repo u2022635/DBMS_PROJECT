@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library Management System</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background-color: #424242;
+    color: #fff;
+    width: 250px; /* Sidebar width */
+    position: fixed;
+    top: 120px; /* Adjust based on header height */
+    left: 0;
+    bottom: 0;
+    padding-top: 20px;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .sidebar a:hover {
+    background-color: #444;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 270px; /* Adjust based on sidebar width */
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  #search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  #search-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+  }
+
+  .book-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  .book-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .book-title {
+    font-weight: bold;
+  }
+
+  .book-author {
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Library Management System</h1>
+</header>
+
+<div class="sidebar">
+  <a href="homepage.html">Dashboard</a>
+  <a href="issue.html">Book Issues And Returns</a>
+  <a href="search.html">Book Search</a>
+  <a href="addbook.html">Add Book</a>
+  <a href="updatebook.html">Update Book</a>
+  <a href="accmanagement.html">Update User Details</a>
+</div>
+
+<div class="container">
+  <h2>Search for Books</h2>
+  <input type="text" id="search-input" placeholder="Search by title, author, category...">
+  <div id="search-results"></div>
+</div>
+
+<script>
+  const books = [
+    { id: 1, title: 'Book 1', author: 'Author A', category: 'Fiction', availability: 'In Stock' },
+    { id: 2, title: 'Book 2', author: 'Author B', category: 'Non-fiction', availability: 'Out of Stock' },
+    { id: 3, title: 'Book 3', author: 'Author C', category: 'Science Fiction', availability: 'In Stock' },
+    { id: 4, title: 'Book 4', author: 'Author D', category: 'Mystery', availability: 'In Stock' },
+  ];
+
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+
+  function displaySearchResults(results) {
+    searchResults.innerHTML = '';
+    results.forEach(book => {
+      const bookElement = document.createElement('div');
+      bookElement.classList.add('book-item');
+      bookElement.innerHTML = `
+        <p class="book-title">${book.title}</p>
+        <p class="book-author">by ${book.author}</p>
+        <p><strong>Category:</strong> ${book.category}</p>
+        <p><strong>Availability:</strong> ${book.availability}</p>
+      `;
+      searchResults.appendChild(bookElement);
+    });
+  }
+
+  function handleSearch() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredBooks = books.filter(book =>
+      book.title.toLowerCase().includes(searchTerm) ||
+      book.author.toLowerCase().includes(searchTerm) ||
+      book.category.toLowerCase().includes(searchTerm)
+    );
+    displaySearchResults(filteredBooks);
+  }
+
+  searchInput.addEventListener('input', handleSearch);
+
+  displaySearchResults(books);
+</script>
+
+</body>
+</html>

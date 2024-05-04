@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Issue and Return</title>
+<style>
+  /* Reset CSS */
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Container */
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+
+ /* Header */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  z-index: 1; /* Ensure the header is above other elements */
+  position: relative; /* Ensure z-index works properly */
+}
+
+
+  /* Sidebar */
+  .sidebar {
+    background-color: #424242;
+    color: #fff;
+    width: 250px; /* Sidebar width */
+    flex: 0 0 auto;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .sidebar a:hover {
+    background-color: #444;
+  }
+
+  /* Main Content */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  .message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Library Management System</h1> </header>
+<div class="container">
+
+  <div class="sidebar">
+ <a href="homepage.html">Dashboard</a>
+    <a href="issue.html">Book Issues And Returns</a>
+    <a href="search.html">Book Search</a>
+    <a href="addbook.html">Add Book</a>
+    <a href="updatebook.html">Update Book</a>
+    <a href="accmanagement.html">Update User Details</a>
+
+     </div>
+
+  <div class="main-content">
+    <h1>Book Issue and Return</h1>
+    <div class="form-group">
+      <label for="bookTitle">Book Title</label>
+      <input type="text" id="bookTitle" placeholder="Enter Book Title">
+    </div>
+    <div class="form-group">
+      <label for="memberName">Member Name</label>
+      <input type="text" id="memberName" placeholder="Enter Member Name">
+    </div>
+    <div class="form-group">
+      <label for="memberID">Member ID</label>
+      <input type="number" id="memberID" placeholder="Enter Member ID">
+    </div>
+    <div class="form-group">
+      <button onclick="issueBook()">Issue Book</button>
+      <button onclick="returnBook()">Return Book</button>
+    </div>
+    <div class="message" id="message"></div>
+  </div>
+
+</div>
+
+<script>
+  function issueBook() {
+    var bookTitle = document.getElementById("bookTitle").value;
+    var memberName = document.getElementById("memberName").value;
+    var memberID = document.getElementById("memberID").value;
+    // Here you can implement the logic to send the request to the backend and handle the response
+    document.getElementById("message").innerText = "Book issued successfully.";
+  }
+
+  function returnBook() {
+    var bookTitle = document.getElementById("bookTitle").value;
+    var memberName = document.getElementById("memberName").value;
+    var memberID = document.getElementById("memberID").value;
+    // Here you can implement the logic to send the request to the backend and handle the response
+    document.getElementById("message").innerText = "Book returned successfully.";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add New Book</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background-color: #424242;
+    color: #fff;
+    width: 250px;
+    position: fixed;
+    top: 120px;
+    bottom: 0;
+    padding-top: 20px;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+  }
+
+  .sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .sidebar a:hover {
+    background-color: #444;
+  }
+
+  /* Main content */
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 270px; /* Adjust based on sidebar width */
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #444;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Add New Book</h1>
+</header>
+
+<div class="sidebar">
+  <!-- Sidebar links -->
+  <a href="homepage.html">Dashboard</a>
+  <a href="issue.html">Book Issues And Returns</a>
+  <a href="search.html">Book Search</a>
+  <a href="addbook.html">Add Book</a>
+  <a href="updatebook.html">Update Book</a>
+  <a href="accmanagement.html">Update User Details</a>
+</div>
+
+<div class="container">
+  <h2>Fill in the details of the new book:</h2>
+  <form id="add-book-form">
+    <input type="text" id="title" name="title" placeholder="Title" required>
+    <input type="text" id="author" name="author" placeholder="Author" required>
+    <input type="text" id="category" name="category" placeholder="Category" required>
+    <input type="number" id="price" name="price" placeholder="Price" required>
+    <input type="number" id="copies" name="copies" placeholder="Number of Copies" required>
+    <input type="submit" value="Add Book">
+  </form>
+</div>
+
+<script>
+  // JavaScript code for handling form submission
+  document.getElementById('add-book-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+    
+    // Get form data
+    const formData = new FormData(this);
+    
+    // Convert form data to JSON
+    const jsonData = {};
+    formData.forEach((value, key) => {
+      jsonData[key] = value;
+    });
+
+    // Example: Send JSON data to server (Replace with actual API call)
+    console.log(jsonData);
+    alert('New book added successfully!');
+    this.reset(); // Reset form fields
+  });
+</script>
+
+</body>
+</html>

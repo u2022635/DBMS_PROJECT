@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account Management</title>
+<style>
+  /* Reset CSS */
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Header */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background-color: #424242;
+    color: #fff;
+    width: 250px; /* Sidebar width */
+    position: fixed;
+    top: 125px; /* Adjust based on header height */
+    left: 0;
+    bottom: 0;
+    padding-top: 20px;
+  }
+
+  .sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: background-color 0.3s ease;
+  }
+
+  .sidebar a:hover {
+    background-color: #444;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-left: 270px; /* Adjust based on sidebar width */
+    margin-top: 20px; /* Adjust based on header height */
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  .message {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Library Management System</h1>
+</header>
+
+<div class="sidebar">
+  <a href="homepage.html">Dashboard</a>
+  <a href="issue.html">Book Issues And Returns</a>
+  <a href="search.html">Book Search</a>
+  <a href="addbook.html">Add Book</a>
+  <a href="updatebook.html">Update Book</a>
+  <a href="accmanagement.html">Update User Details</a>
+</div>
+
+<div class="container">
+  <h1>Account Management</h1>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter Username">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter Password">
+  </div>
+  <div class="form-group">
+    <button onclick="updateAccount()">Update Account</button>
+  </div>
+  <div class="message" id="message"></div>
+</div>
+
+<script>
+  function updateAccount() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    // Here you can implement the logic to send the updated account information to the backend and handle the response
+    document.getElementById("message").innerText = "Account updated successfully.";
+  }
+</script>
+
+</body>
+</html>
